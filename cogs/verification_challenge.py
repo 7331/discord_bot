@@ -14,7 +14,7 @@ DEFAULT_CODE_LENGTH = 8
 
 
 class VerificationModal(Modal):
-    def __init__(self, *, timeout: float = DEFAULT_TIMEOUT, verification_code_length: int = DEFAULT_CODE_LENGTH, hardcode: str):
+    def __init__(self, *, timeout: float = DEFAULT_TIMEOUT, verification_code_length: int = DEFAULT_CODE_LENGTH, hardcode: str = ''):
         self.verification_code = hardcode or ''.join(choices(ascii_letters + digits, k=verification_code_length))
         self.length = len(self.verification_code)
         
@@ -67,7 +67,7 @@ class VerificationSlashCommand(commands.Cog):
     @commands.slash_command(
         name='verify',
         description='self verification',
-        guild_ids=[1268024121674043412])
+        guild_ids=[1268024121674043412]) # replace with your server_id
     async def verification_slash_command(self, ctx: discord.ApplicationContext):
         verification_modal = VerificationModal()
         await ctx.send_modal(verification_modal)
